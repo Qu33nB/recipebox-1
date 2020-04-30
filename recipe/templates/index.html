@@ -1,0 +1,28 @@
+<h1>The Recipe Box</h1>
+{% for recipe in data %}
+<ul>
+  <!-- <a href="http://127.0.0.1:8000/recipe/">{{ recipe.title }}</a> -->
+  <a href="{% url 'recipe_url' %}">{{ recipe.title }}</a>
+</ul>
+</ul>
+{% endfor %}
+    <!-- <ul>
+      {{ recipe.title }} -->
+<!-- <ul>
+  {% for recipe in data %}
+  <li>
+    {{ recipe.title }} | by {{ recipe.author.name }}
+  </li>
+  <ul>
+    <li>
+      {{ recipe.description }}
+    </li>
+    <li>
+      {{ recipe.time_required }}
+    </li>
+    <li>
+      {{ recipe.instruction }}
+    </li>
+  </ul>
+  {% endfor %}
+</ul> -->

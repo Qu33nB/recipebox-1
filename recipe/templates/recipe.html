@@ -1,0 +1,22 @@
+<h1>Recipes</h1>
+<ul>
+  {% for recipe in data %}
+  <h2>{{recipe.title}}</h2>
+  <li>
+    <a href="{% url 'author_url' %}">{{ recipe.author.name }}</a> | Created on
+    {{ recipe.date }}
+  </li>
+  <ul>
+    <li>
+      {{ recipe.time_required }}
+    </li>
+    <li>
+      {{ recipe.description }}
+    </li>
+    <li>
+      {{ recipe.instruction }}
+    </li>
+  </ul>
+  {% endfor %}
+</ul>
+<a href="{% url 'index_url' %}">Home</a>

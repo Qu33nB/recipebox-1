@@ -1,0 +1,9 @@
+<h1>Meet Our Writers</h1>
+
+{% for recipe in data %}
+<h2>{{recipe.author.name}}</h2>
+<ul>
+  {{ recipe.author.bio }}
+</ul>
+{% endfor %}
+<a href="{% url 'index_url' %}">Home</a>
