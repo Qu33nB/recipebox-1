@@ -1,9 +1,12 @@
-<h1>Meet Our Writers</h1>
+<h1>Bio</h1>
 
-{% for recipe in data %}
-<h2>{{recipe.author.name}}</h2>
+<h2>{{author.name}}</h2>
+<h2>author: bio</h2>
 <ul>
-  {{ recipe.author.bio }}
+  {{ author.bio }} {{ recipe.title }}
 </ul>
-{% endfor %}
+<h3>Recipes:</h3>
+{% for recipe in data %} {% if recipe.author == author %}
+<a href="{% url 'recipe_url' id=recipe.id%}">{{recipe.title}}</a>
+{% endif %} {% endfor %}
 <a href="{% url 'index_url' %}">Home</a>
