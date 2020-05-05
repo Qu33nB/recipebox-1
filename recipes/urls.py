@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('author/<int:id>/', views.author, name='author_url'),
     path('recipe/<int:id>/', views.recipe, name='recipe_url'),
-    path('home/', views.index, name='index_url')
+    path('home/', views.index, name='homepage'),
+    path('addrecipe/', views.addrecipe, name='addrecipe'),
+    path('addauthor/', views.addauthor, name='addauthor'),
 ]
 urlpatterns += recipe_urls

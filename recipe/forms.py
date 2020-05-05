@@ -1,31 +1,31 @@
-from django.db import models
+from django import forms
+from recipe.models import Author
+# class AddAuthorForm
 
-from django.utils import timezone
-# Create your models here.
+
+class AddRecipeForm(forms.Form):
+    title = forms.CharField(max_length=30)
+    author = forms.ModelChoiceField(queryset=Author.objects.all())
+    description = forms.CharField(widget=forms.Textarea)
+    time_required = forms.CharField(max_length=30)
+    instruction = forms.CharField(widget=forms.Textarea)
+
+
+class AddAuthorForm(forms.ModelForm):
+    class Meta:
+        model = Author
+        fields = [
+            'name'
+        ]
+
+
 """
-Author model:
-
-Name (CharField)
-Bio (TextField)
-
-
-Recipe Model:
-
-Title (CharField)
-Author link (ForeignKey)
-Description (TextField)
-Time Required (Charfield) (for example, "One hour")
-Instructions (TextField)
-"""
-
-
 class Author(models.Model):
     name = models.CharField(max_length=50)
     bio = models.TextField()
 
     def __str__(self):
         return self.name
-
 
 class RecipeItem(models.Model):
     title = models.CharField(max_length=30)
@@ -37,3 +37,4 @@ class RecipeItem(models.Model):
 
     def __str__(self):
         return self.title
+"""
