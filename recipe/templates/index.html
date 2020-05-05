@@ -2,5 +2,14 @@
 {% for recipe in data %}
 <ul>
   <a href="{% url 'recipe_url' id=recipe.id%}">{{ recipe.title }}</a>
+  | By
+  <a href="{% url 'author_url' id=recipe.author.id %}"
+    >{{recipe.author.name}}</a
+  >
 </ul>
 {% endfor %}
+<p>To add a new recipe, click <a href="{% url 'addrecipe' %}">here</a>.</p>
+<p>
+  To sign up and share your own recipes, click
+  <a href="{% url 'addauthor' %}">here</a>.
+</p>
