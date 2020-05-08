@@ -4,10 +4,11 @@ from recipe import views
 
 
 urlpatterns = [
-    path('', views.index),
-    path('', views.author),
-    path('', views.recipe),
-    # path('addrecipe/', views.addrecipe),
-    # path('author/<int:id>/', views.author)
-    # path('admin/', admin.site.urls),
+    path('author/<int:id>/', views.author, name='author_url'),
+    path('recipe/<int:id>/', views.recipe, name='recipe_url'),
+    path('home/', views.index, name='homepage'),
+    path('addrecipe/', views.addrecipe, name='addrecipe'),
+    path('addauthor/', views.addauthor, name='addauthor'),
+    path('login/', views.loginview, name='login_url'),
+    path('logout/', views.logoutview, name='logout_url'),
 ]
