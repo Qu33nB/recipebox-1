@@ -1,15 +1,27 @@
 <h1>The Recipe Box</h1>
+<h2>The best place to go for awesome recipes</h2>
+Are you logged in? {{ request.user.is_authenticated }}
+<p>Hey there, {{ user.first_name }}!</p>
+<hr />
+<h3>Recently Added Recipes:</h3>
 {% for recipe in data %}
+
 <ul>
   <a href="{% url 'recipe_url' id=recipe.id%}">{{ recipe.title }}</a>
   | By
   <a href="{% url 'author_url' id=recipe.author.id %}"
     >{{recipe.author.name}}</a
   >
+  <br />
+  {{recipe.description}}
 </ul>
 {% endfor %}
+<hr />
 <p>To add a new recipe, click <a href="{% url 'addrecipe' %}">here</a>.</p>
 <p>
-  To sign up and share your own recipes, click
+  To add an author, click
   <a href="{% url 'addauthor' %}">here</a>.
 </p>
+
+<a href="{% url 'login_url' %}">Login</a> |
+<a href="{% url 'logout_url' %}">Logout</a>
