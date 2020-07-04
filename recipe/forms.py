@@ -1,5 +1,5 @@
 from django import forms
-from recipe.models import Author
+from recipe.models import Author, RecipeItem
 # class AddAuthorForm
 
 
@@ -24,22 +24,14 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
-"""
-class Author(models.Model):
-    name = models.CharField(max_length=50)
-    bio = models.TextField()
-
-    def __str__(self):
-        return self.name
-
-class RecipeItem(models.Model):
-    title = models.CharField(max_length=30)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    description = models.TextField()
-    time_required = models.CharField(max_length=30)
-    instruction = models.TextField()
-    date = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return self.title
-"""
+class EditRecipeForm(forms.ModelForm):
+    
+    class Meta:
+        model = RecipeItem
+        fields = [
+            'title',
+            'author',
+            'description',
+            'time_required',
+            'instruction',
+        ]
