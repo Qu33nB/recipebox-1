@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from recipe.models import Author, RecipeItem
-from recipe.forms import AddRecipeForm, AddAuthorForm, LoginForm
+from recipe.forms import AddRecipeForm, AddAuthorForm, LoginForm, EditRecipeForm
 from django.contrib.auth.models import User
 # Create your views here.
 
@@ -98,3 +98,46 @@ def recipe(request, id):
     recipe = RecipeItem.objects.get(id=id)
 
     return render(request, 'recipe.html', {'recipe': recipe})
+
+
+@login_required
+def edit_view(request, id):
+    recipe = RecipeItem.objects.get(id=id)
+    if request.method == 'POST':
+        form = EditRecipeForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            recipe.title = data['title']
+            recipe.author = data['author']
+            recipe.description = data['description']
+            recipe.time_required = data['time_required']
+            recipe.instruction = data['instruction']
+            recipe.save()
+            return HttpResponseRedirect(reverse('recipe.html', args=(id,)))
+    
+    form = EditRecipeForm(initial={
+        'title': recipe.title,
+        'author': recipe.author,
+        'description': recipe.description,
+        'time_required': recipe.time_required,
+        'instruction': recipe.instruction
+    })
+    return render(request, 'genericform.html', {'form': form})
+
+
+@login_required
+def add_favorite(request, id):
+    author = request.user.author
+    recipe = RecipeItem.objects.get(id=id)
+    author.favorite.add(recipe)
+    author.save()
+    return HttpResponseRedirect(reverse('recipe.html', args=(id,)))
+
+
+@login_required
+def remove_favorite(request, id):
+    author = request.user.author
+    recipe = RecipeItem.objects.get(id=id)
+    author.favorite.remove()
+    author.save()
+    return HttpResponseRedirect(reverse('recipe.html'), args=(id,))
