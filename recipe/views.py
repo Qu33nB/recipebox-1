@@ -101,7 +101,7 @@ def recipe(request, id):
 
 
 @login_required
-def edit_view(request, id):
+def edit_recipe(request, id):
     recipe = RecipeItem.objects.get(id=id)
     if request.method == 'POST':
         form = EditRecipeForm(request.POST)
@@ -113,7 +113,7 @@ def edit_view(request, id):
             recipe.time_required = data['time_required']
             recipe.instruction = data['instruction']
             recipe.save()
-            return HttpResponseRedirect(reverse('recipe.html', args=(id,)))
+            return HttpResponseRedirect(reverse('recipe_url', args=(id,)))
     
     form = EditRecipeForm(initial={
         'title': recipe.title,
@@ -131,7 +131,7 @@ def add_favorite(request, id):
     recipe = RecipeItem.objects.get(id=id)
     author.favorite.add(recipe)
     author.save()
-    return HttpResponseRedirect(reverse('recipe.html', args=(id,)))
+    return HttpResponseRedirect(reverse('recipe_url', args=(id,)))
 
 
 @login_required
@@ -140,4 +140,4 @@ def remove_favorite(request, id):
     recipe = RecipeItem.objects.get(id=id)
     author.favorite.remove()
     author.save()
-    return HttpResponseRedirect(reverse('recipe.html'), args=(id,))
+    return HttpResponseRedirect(reverse('recipe_url'), args=(id,))

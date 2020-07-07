@@ -11,4 +11,7 @@ urlpatterns = [
     path('addauthor/', views.addauthor, name='addauthor'),
     path('login/', views.loginview, name='login_url'),
     path('logout/', views.logoutview, name='logout_url'),
+    path('editrecipe/', views.edit_recipe, name='edit'),
+    path('add_fave/<int:id>/', views.add_favorite, name='fave'),
+    path('remove_fave/<int:id>/', views.remove_favorite, name='unfave')
 ]
